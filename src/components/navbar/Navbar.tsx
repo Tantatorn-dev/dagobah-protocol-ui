@@ -1,26 +1,25 @@
 "use client";
-import { Image } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, Heading, Image, Spacer, Stack } from "@chakra-ui/react";
 import { css } from "@emotion/css";
-import React, { ReactNode } from "react";
+import React from "react";
 
 const navbarStyles = css`
   background-color: #405654;
   border-bottom: 1px solid #e1e4e8;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 1px;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  padding: 18px;
 `;
 
-const Navbar: React.FC<{ children?: ReactNode }> = ({ children }) => {
+const Navbar = () => {
   return (
-    <div className={navbarStyles}>
-      <Image src="img/dagobah.png" alt="dagobah" w={200} />
-      {children}
-    </div>
+    <Flex minWidth="max-content" alignItems="center" gap="2" className={navbarStyles}>
+      <Box p="2">
+        <Heading size="md">Dagobah Protocol</Heading>
+      </Box>
+      <Spacer />
+      <ButtonGroup gap="2">
+        <Button colorScheme="teal">Connect Wallet</Button>
+      </ButtonGroup>
+    </Flex>
   );
 };
 
