@@ -5,11 +5,14 @@ import { Config, DAppProvider, Goerli, Mainnet } from "@usedapp/core";
 import { getDefaultProvider } from "ethers";
 import "./globals.css";
 
+const HYPERSPACE_CHAIN_ID = 3141;
+const HYPERSPACE_RPC_URL = "https://api.hyperspace.node.glif.io/rpc/v1"
+
 const config: Config = {
   readOnlyChainId: Mainnet.chainId,
   readOnlyUrls: {
     [Mainnet.chainId]: getDefaultProvider('mainnet'),
-    [Goerli.chainId]: getDefaultProvider('goerli'),
+    [HYPERSPACE_CHAIN_ID]: getDefaultProvider(HYPERSPACE_RPC_URL),
   },
 }
 
