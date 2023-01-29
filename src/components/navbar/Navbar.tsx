@@ -10,7 +10,6 @@ import {
   Popover,
   PopoverArrow,
   PopoverBody,
-  PopoverCloseButton,
   PopoverContent,
   PopoverFooter,
   PopoverTrigger,
@@ -25,7 +24,6 @@ import { convertBalance } from "@/lib/util";
 
 const navbarStyles = css`
   background-color: #405654;
-  border-bottom: 1px solid #e1e4e8;
   padding: 18px;
 `;
 
