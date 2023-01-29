@@ -6,15 +6,35 @@ import { getDefaultProvider } from "ethers";
 import "./globals.css";
 
 const HYPERSPACE_CHAIN_ID = 3141;
-const HYPERSPACE_RPC_URL = "https://api.hyperspace.node.glif.io/rpc/v1"
+const HYPERSPACE_RPC_URL = "https://api.hyperspace.node.glif.io/rpc/v1";
 
 const config: Config = {
-  readOnlyChainId: Mainnet.chainId,
+  readOnlyChainId: HYPERSPACE_CHAIN_ID,
   readOnlyUrls: {
-    [Mainnet.chainId]: getDefaultProvider('mainnet'),
-    [HYPERSPACE_CHAIN_ID]: getDefaultProvider(HYPERSPACE_RPC_URL),
+    [HYPERSPACE_CHAIN_ID]: HYPERSPACE_RPC_URL,
   },
-}
+  networks: [
+    {
+      chainId: HYPERSPACE_CHAIN_ID,
+      chainName: "Hyperspace",
+      isTestChain: true,
+      rpcUrl: HYPERSPACE_RPC_URL,
+      nativeCurrency: {
+        name: "TFIL",
+        symbol: "TFIL",
+        decimals: 18,
+      },
+      isLocalChain: false,
+      getExplorerAddressLink: (address) => {
+        return `https://filfox.info/en/address/${address}`;
+      },
+      getExplorerTransactionLink: (txHash) => {
+        return `https://filfox.info/en/message/${txHash}`;
+      },
+      multicallAddress: "0x00",
+    },
+  ],
+};
 
 export default function RootLayout({
   children,
