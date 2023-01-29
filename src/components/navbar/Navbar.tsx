@@ -1,4 +1,6 @@
 "use client";
+import React from "react";
+import zondaxFetcher from "@/lib/fetcher";
 import {
   Box,
   Button,
@@ -10,13 +12,16 @@ import {
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
+  PopoverFooter,
   PopoverTrigger,
   Portal,
   Spacer,
+  Text,
 } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useEthers } from "@usedapp/core";
-import React from "react";
+import useSWR from "swr";
+import { convertBalance } from "@/lib/util";
 
 const navbarStyles = css`
   background-color: #405654;
@@ -26,6 +31,7 @@ const navbarStyles = css`
 
 const Navbar = () => {
   const { activateBrowserWallet, account, deactivate } = useEthers();
+  const { data } = useSWR(`/account/balance/${account}`, zondaxFetcher);
 
   return (
     <Flex
@@ -59,10 +65,19 @@ const Navbar = () => {
               </Button>
             </PopoverTrigger>
             <Portal>
-              <PopoverContent alignItems="center" width="10rem">
+              <PopoverContent alignItems="center" width="15rem">
                 <PopoverArrow />
-                <PopoverCloseButton />
                 <PopoverBody>
+                  <Text
+                    css={css`
+                      color: black;
+                    `}
+                  >
+                    My Balance:{" "}
+                    {data ? convertBalance(data.balances[0].value) : 0} TFIL
+                  </Text>
+                </PopoverBody>
+                <PopoverFooter>
                   <Button
                     onClick={() => {
                       deactivate();
@@ -71,7 +86,7 @@ const Navbar = () => {
                   >
                     Deactivate
                   </Button>
-                </PopoverBody>
+                </PopoverFooter>
               </PopoverContent>
             </Portal>
           </Popover>
