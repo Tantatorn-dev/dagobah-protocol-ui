@@ -2,7 +2,6 @@
 import Navbar from "@/components/navbar/Navbar";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Config, DAppProvider, Mainnet } from "@usedapp/core";
-import { getDefaultProvider } from "ethers";
 import "./globals.css";
 
 const HYPERSPACE_CHAIN_ID = 3141;
