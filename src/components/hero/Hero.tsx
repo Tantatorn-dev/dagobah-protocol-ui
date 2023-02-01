@@ -1,5 +1,6 @@
 import { Button, Center, Flex, Heading, Stack } from "@chakra-ui/react";
 import { css } from "@emotion/react";
+import Link from "next/link";
 import Planet from "./Planet";
 
 const Hero = () => {
@@ -27,17 +28,23 @@ const Hero = () => {
               Vice versa, Get rewarded for providing protection
             </Heading>
           </Stack>
-          <Button
+          <Stack
             css={css`
-              width: 12.4rem;
-              align-self: center;
-              background: #466164;
-              margin-top: 5rem;
+              align-items: center;
             `}
-            size="lg"
           >
-            Launch App
-          </Button>
+            <Link href="/insurance">
+              <Button
+                css={css`
+                  width: 12.4rem;
+                  background: #466164;
+                `}
+                size="lg"
+              >
+                Launch App
+              </Button>
+            </Link>
+          </Stack>
         </Stack>
       </Center>
     </Flex>
