@@ -1,5 +1,11 @@
+import DealList from "@/components/insurance/DealList";
+
 const InsurancePage = () => {
-  return <></>;
+  return (
+    <>
+      <DealList />
+    </>
+  );
 };
 
 export default InsurancePage;
