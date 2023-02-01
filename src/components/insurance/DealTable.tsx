@@ -1,12 +1,12 @@
 "use client";
-import zondaxFetcher from "@/lib/fetcher";
+import { filfoxFetcher } from "@/lib/fetcher";
 import { Table, TableCaption, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 import { useEthers } from "@usedapp/core";
 import useSWR from "swr";
 
 const DealTable = () => {
   const { account } = useEthers();
-  const { data } = useSWR(`/transactions/address/${account}`, zondaxFetcher);
+  const { data } = useSWR(`/deal/list`, filfoxFetcher);
 
   return (
     <TableContainer marginTop="2.2rem">

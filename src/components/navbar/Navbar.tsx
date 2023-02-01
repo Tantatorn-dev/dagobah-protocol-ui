@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import zondaxFetcher from "@/lib/fetcher";
 import {
   Box,
   Button,
@@ -21,6 +20,7 @@ import { css } from "@emotion/css";
 import { useEthers } from "@usedapp/core";
 import useSWR from "swr";
 import { convertBalance } from "@/lib/util";
+import { zondaxFetcher } from "@/lib/fetcher";
 
 const navbarStyles = css`
   background-color: #405654;
