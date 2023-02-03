@@ -8,7 +8,6 @@ import {
   TableCaption,
   TableContainer,
   Tbody,
-  Tfoot,
   Th,
   Thead,
   Tr,
