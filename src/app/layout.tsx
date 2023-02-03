@@ -1,7 +1,8 @@
 "use client";
 import Navbar from "@/components/navbar/Navbar";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Config, DAppProvider, Mainnet } from "@usedapp/core";
+import { css } from "@emotion/css";
+import { Config, DAppProvider } from "@usedapp/core";
 import "./globals.css";
 
 const HYPERSPACE_CHAIN_ID = 3141;
@@ -47,7 +48,14 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
+      <body
+        className={css`
+          width: 100%;
+          height: 100%;
+          color: white;
+          background-color: #150a07;
+        `}
+      >
         <DAppProvider config={config}>
           <ChakraProvider>
             <Navbar />
