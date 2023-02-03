@@ -1,35 +1,59 @@
 "use client";
 import { filfoxFetcher } from "@/lib/fetcher";
-import { Table, TableCaption, TableContainer, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
-import { useEthers } from "@usedapp/core";
+import { kilobytesToAppropriateUnit, shortenAddress } from "@/lib/util";
+import {
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Th,
+  Thead,
+  Tr,
+} from "@chakra-ui/react";
+import { css } from "@emotion/react";
 import useSWR from "swr";
 
 const DealTable = () => {
-  const { account } = useEthers();
-  const { data } = useSWR(`/deal/list`, filfoxFetcher);
+  const { data, isLoading } = useSWR<DealResponse>(`/deal/list`, filfoxFetcher);
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
-    <TableContainer marginTop="2.2rem">
+    <TableContainer
+      css={css`
+        margin-top: 2.2rem;
+        margin-bottom: 3.2rem;
+      `}
+    >
       <Table variant="simple">
-        <TableCaption>Total 10 Deals</TableCaption>
+        <TableCaption>Total {data?.totalCount} Deals</TableCaption>
         <Thead>
           <Tr>
-            <Th isNumeric>height</Th>
-            <Th isNumeric>tx_timestamp</Th>
-            <Th>tx_hash</Th>
-	    <Th>tx_from</Th>
-	    <Th>tx_to</Th>
-	    <Th>amount</Th>
-	    <Th>status</Th>
+            <Th isNumeric>Deal ID</Th>
+            <Th>Create Time</Th>
+            <Th>Client</Th>
+            <Th>Provider</Th>
+            <Th>Piece Size</Th>
+            <Th>Verified Deal</Th>
+            <Th>Storage Fee</Th>
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-          </Tr>
-          <Tr>
-          </Tr>
-          <Tr>
-          </Tr>
+          {data?.deals.map((deal) => {
+            return (
+              <Tr key={deal.id}>
+                <Th isNumeric>{deal.id}</Th>
+                <Th>{new Date(deal.timestamp * 1000).toLocaleString()}</Th>
+                <Th>{shortenAddress(deal.client)}</Th>
+                <Th>{shortenAddress(deal.provider)}</Th>
+                <Th>{kilobytesToAppropriateUnit(deal.pieceSize)}</Th>
+                <Th>{deal.verifiedDeal ? "Yes" : "No"}</Th>
+                <Th>{deal.stroagePrice}</Th>
+              </Tr>
+            );
+          })}
+          <Tr></Tr>
         </Tbody>
       </Table>
     </TableContainer>

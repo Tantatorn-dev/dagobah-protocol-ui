@@ -48,20 +48,18 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
+      <body
+        className={css`
+          width: 100%;
+          height: 100%;
+          color: white;
+          background-color: #150a07;
+        `}
+      >
         <DAppProvider config={config}>
           <ChakraProvider>
-            <main
-              className={css`
-                width: 100%;
-                height: 100vh;
-                color: white;
-                background-color: #150a07;
-              `}
-            >
-              <Navbar />
-              {children}
-            </main>
+            <Navbar />
+            {children}
           </ChakraProvider>
         </DAppProvider>
       </body>
