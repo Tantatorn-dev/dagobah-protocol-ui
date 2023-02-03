@@ -10,8 +10,6 @@ const CONTRACT = new Contract(
   interfaces.positionInterface
 ) as DagobahRegistry;
 
-CONTRACT;
-
 function useRegistry() {
   const { send, state, resetState } = useContractFunction(CONTRACT, "issue");
 
