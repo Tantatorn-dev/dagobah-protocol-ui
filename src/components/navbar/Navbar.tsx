@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
 import {
   Box,
   Button,
@@ -29,7 +29,7 @@ const navbarStyles = css`
 
 const HYPERSPACE_RPC_URL = "https://api.hyperspace.node.glif.io/rpc/v1";
 
-const Navbar = () => {
+const Navbar: React.FC<{ children?: ReactNode }> = ({ children }) => {
   const { activateBrowserWallet, account, deactivate, chainId, switchNetwork } =
     useEthers();
   const { data } = useSWR(`/account/balance/${account}`, zondaxFetcher);
@@ -44,7 +44,7 @@ const Navbar = () => {
             params: [{ chainId: "0xc45" }],
           });
         } catch (e) {
-          console.log(e)
+          console.log(e);
           if ((e as any).code == 4902) {
             // @ts-ignore
             await window.ethereum.request({
@@ -98,6 +98,7 @@ const Navbar = () => {
             Connect Wallet
           </Button>
         )}
+        {children}
         {account && (
           <Popover>
             <PopoverTrigger>

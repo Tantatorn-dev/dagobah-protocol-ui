@@ -1,10 +1,11 @@
 "use client";
 import Hero from "@/components/hero/Hero";
-import { css } from "@emotion/css";
+import Navbar from "@/components/navbar/Navbar";
 
 export default function Home() {
   return (
     <>
+      <Navbar />
       <Hero />
     </>
   );
