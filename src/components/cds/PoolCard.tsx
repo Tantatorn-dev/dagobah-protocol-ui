@@ -12,21 +12,26 @@ import {
 import { css } from "@emotion/react";
 import { DonutChart, Legend } from "@tremor/react";
 
-const mockData = [
-  {
-    name: "Other",
-    value: 9800,
-  },
-  {
-    name: "My Value",
-    value: 4567,
-  },
-];
-
 const valueFormatter = (number: number) =>
-  `${Intl.NumberFormat("us").format(number).toString()} USDT`;
+  `${Intl.NumberFormat("us").format(number).toString()} TFIL`;
 
-const PoolCard = () => {
+type Props = {
+  myValue: number;
+  other: number;
+};
+
+const PoolCard: React.FC<Props> = ({ myValue, other }) => {
+  const data = [
+    {
+      name: "Other",
+      value: other,
+    },
+    {
+      name: "My Value",
+      value: myValue,
+    },
+  ];
+
   return (
     <Card
       css={css`
@@ -39,7 +44,7 @@ const PoolCard = () => {
       <CardBody>
         <HStack>
           <DonutChart
-            data={mockData}
+            data={data}
             category="value"
             dataKey="name"
             valueFormatter={valueFormatter}
