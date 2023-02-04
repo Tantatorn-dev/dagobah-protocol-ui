@@ -16,11 +16,12 @@ const valueFormatter = (number: number) =>
   `${Intl.NumberFormat("us").format(number).toString()} TFIL`;
 
 type Props = {
+  name: string;
   myValue: number;
   other: number;
 };
 
-const PoolCard: React.FC<Props> = ({ myValue, other }) => {
+const PoolCard: React.FC<Props> = ({ name, myValue, other }) => {
   const data = [
     {
       name: "Other",
@@ -39,7 +40,7 @@ const PoolCard: React.FC<Props> = ({ myValue, other }) => {
       `}
     >
       <CardHeader>
-        <Heading size="md">Pool 0xffffffff</Heading>
+        <Heading size="md">Pool {name}</Heading>
       </CardHeader>
       <CardBody>
         <HStack>
