@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Button,
@@ -27,9 +27,52 @@ const navbarStyles = css`
   padding: 18px;
 `;
 
+const HYPERSPACE_RPC_URL = "https://api.hyperspace.node.glif.io/rpc/v1";
+
 const Navbar = () => {
-  const { activateBrowserWallet, account, deactivate } = useEthers();
+  const { activateBrowserWallet, account, deactivate, chainId, switchNetwork } =
+    useEthers();
   const { data } = useSWR(`/account/balance/${account}`, zondaxFetcher);
+
+  useEffect(() => {
+    async function checkNetwork() {
+      if (chainId !== 3141) {
+        try {
+          // @ts-ignore
+          await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0xc45" }],
+          });
+        } catch (e) {
+          console.log(e)
+          if ((e as any).code == 4902) {
+            // @ts-ignore
+            await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: "0xc45",
+                  chainName: "Hyperspace",
+                  rpcUrls: [HYPERSPACE_RPC_URL],
+                  nativeCurrency: {
+                    name: "TFIL",
+                    symbol: "TFIL",
+                    decimals: 18,
+                  },
+                },
+              ],
+            });
+            // @ts-ignore
+            await window.ethereum.request({
+              method: "wallet_switchEthereumChain",
+              params: [{ chainId: "0xc45" }],
+            });
+          }
+        }
+      }
+    }
+    checkNetwork();
+  }, [chainId]);
 
   return (
     <Flex
