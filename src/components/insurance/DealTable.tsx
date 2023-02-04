@@ -12,8 +12,10 @@ import {
   Thead,
   Tr,
   VStack,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { css } from "@emotion/react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 
@@ -56,7 +58,11 @@ const DealTable = () => {
             {data?.deals.map((deal) => {
               return (
                 <Tr key={deal.id}>
-                  <Th isNumeric>{deal.id}</Th>
+                  <Th isNumeric>
+                    <Link href={`/insurance/detail?dealId=${deal.id}`} passHref legacyBehavior>
+                      <ChakraLink>{deal.id}</ChakraLink>
+                    </Link>
+                  </Th>
                   <Th>{new Date(deal.timestamp * 1000).toLocaleString()}</Th>
                   <Th>{shortenAddress(deal.client)}</Th>
                   <Th>{shortenAddress(deal.provider)}</Th>
