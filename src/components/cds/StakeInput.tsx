@@ -1,7 +1,6 @@
-'use client';
+"use client";
 import { MOCK_POOL_ADDR } from "@/lib/const";
-import { zondaxFetcher } from "@/lib/fetcher";
-import { convertBalance } from "@/lib/util";
+import { useBalance } from "@/lib/hooks";
 import {
   Button,
   ButtonGroup,
@@ -11,17 +10,12 @@ import {
   NumberInputField,
   NumberInputStepper,
 } from "@chakra-ui/react";
-import { useEthers, useSendTransaction } from "@usedapp/core";
+import { useSendTransaction } from "@usedapp/core";
 import { ethers } from "ethers";
-import { useMemo, useState } from "react";
-import useSWR from "swr";
+import { useState } from "react";
 
 const StakeInput = () => {
-  const { account } = useEthers();
-  const { data } = useSWR(`/account/balance/${account}`, zondaxFetcher);
-  const myBalance = useMemo(() => {
-    return data ? convertBalance(data.balances[0].value) : 0;
-  }, [data]);
+  const balance = useBalance();
   const { sendTransaction } = useSendTransaction();
   const [sendValue, setSendValue] = useState(0);
 
@@ -35,7 +29,7 @@ const StakeInput = () => {
   return (
     <ButtonGroup spacing="2" width="100%" justifyContent="flex-end">
       <NumberInput
-        max={myBalance}
+        max={balance}
         keepWithinRange={false}
         clampValueOnBlur={false}
         value={sendValue}
