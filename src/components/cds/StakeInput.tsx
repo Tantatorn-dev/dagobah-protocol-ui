@@ -1,4 +1,5 @@
 'use client';
+import { MOCK_POOL_ADDR } from "@/lib/const";
 import { zondaxFetcher } from "@/lib/fetcher";
 import { convertBalance } from "@/lib/util";
 import {
@@ -14,7 +15,6 @@ import { useEthers, useSendTransaction } from "@usedapp/core";
 import { ethers } from "ethers";
 import { useMemo, useState } from "react";
 import useSWR from "swr";
-import { mockPoolAddr } from "./PoolList";
 
 const StakeInput = () => {
   const { account } = useEthers();
@@ -28,10 +28,9 @@ const StakeInput = () => {
   const onStake = () => {
     sendTransaction({
       value: ethers.utils.parseEther(sendValue.toString()),
-      to: mockPoolAddr,
+      to: MOCK_POOL_ADDR,
     });
   };
-
 
   return (
     <ButtonGroup spacing="2" width="100%" justifyContent="flex-end">
