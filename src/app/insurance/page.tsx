@@ -9,7 +9,9 @@ const InsurancePage = () => {
     <>
       <Navbar>
         <Link href="/cds">
-          <Button variant="ghost">Switch to CDS Holder</Button>
+          <Button colorScheme="whiteAlpha" variant="ghost" color="white">
+            Switch to CDS Holder
+          </Button>
         </Link>
       </Navbar>
       <DealList />

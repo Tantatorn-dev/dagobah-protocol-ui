@@ -2,6 +2,7 @@
 
 import useRegister from "@/contracts/hooks/useRegister";
 import { filfoxFetcher } from "@/lib/fetcher";
+import { kilobytesToAppropriateUnit } from "@/lib/util";
 import {
   Box,
   Button,
@@ -89,7 +90,7 @@ export const DealDetail = () => {
           </SubBox>
           <SubBox>
             <Text>Piece Size:</Text>
-            <Text>{data.pieceSize}</Text>
+            <Text>{kilobytesToAppropriateUnit(data.pieceSize)}</Text>
           </SubBox>
           <SubBox>
             <Text>Storage Price:</Text>

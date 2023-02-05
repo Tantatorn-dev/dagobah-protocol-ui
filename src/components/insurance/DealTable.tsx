@@ -45,30 +45,42 @@ const DealTable = () => {
           <TableCaption>Total {data?.totalCount} Deals</TableCaption>
           <Thead>
             <Tr>
-              <Th isNumeric>Deal ID</Th>
-              <Th>Create Time</Th>
-              <Th>Client</Th>
-              <Th>Provider</Th>
-              <Th>Piece Size</Th>
-              <Th>Verified Deal</Th>
-              <Th>Storage Fee</Th>
+              <Th color="cyan.200" isNumeric>
+                Deal ID
+              </Th>
+              <Th color="cyan.200">Create Time</Th>
+              <Th color="cyan.200">Client</Th>
+              <Th color="cyan.200">Provider</Th>
+              <Th color="cyan.200">Piece Size</Th>
+              <Th color="cyan.200">Verified Deal</Th>
+              <Th color="cyan.200">Storage Fee</Th>
             </Tr>
           </Thead>
           <Tbody>
             {data?.deals.map((deal) => {
               return (
                 <Tr key={deal.id}>
-                  <Th isNumeric>
-                    <Link href={`/insurance/detail?dealId=${deal.id}`} passHref legacyBehavior>
+                  <Th color="white" isNumeric>
+                    <Link
+                      href={`/insurance/detail?dealId=${deal.id}`}
+                      passHref
+                      legacyBehavior
+                    >
                       <ChakraLink>{deal.id}</ChakraLink>
                     </Link>
                   </Th>
-                  <Th>{new Date(deal.timestamp * 1000).toLocaleString()}</Th>
+                  <Th color="white">
+                    {new Date(deal.timestamp * 1000).toLocaleString()}
+                  </Th>
                   <Th>{shortenAddress(deal.client)}</Th>
                   <Th>{shortenAddress(deal.provider)}</Th>
-                  <Th>{kilobytesToAppropriateUnit(deal.pieceSize)}</Th>
-                  <Th>{deal.verifiedDeal ? "Yes" : "No"}</Th>
-                  <Th>{deal.stroagePrice}</Th>
+                  <Th color="white">
+                    {kilobytesToAppropriateUnit(deal.pieceSize)}
+                  </Th>
+                  <Th color={deal.verifiedDeal ? "green.400" : "red.400"}>
+                    {deal.verifiedDeal ? "Yes" : "No"}
+                  </Th>
+                  <Th color="white">{deal.stroagePrice}</Th>
                 </Tr>
               );
             })}
