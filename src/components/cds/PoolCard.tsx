@@ -39,7 +39,7 @@ const PoolCard: React.FC<Props> = ({ name, myValue, other }) => {
       `}
     >
       <CardHeader>
-        <Heading size="md">Pool {name}</Heading>
+        <Heading color="#a09590" size="md">Pool {name}</Heading>
       </CardHeader>
       <CardBody>
         <HStack>
@@ -49,11 +49,11 @@ const PoolCard: React.FC<Props> = ({ name, myValue, other }) => {
             dataKey="name"
             valueFormatter={valueFormatter}
             marginTop="mt-6"
-            colors={["slate", "cyan"]}
+            colors={["slate", "emerald"]}
           />
           <Legend
             categories={["Other", "My Value"]}
-            colors={["slate", "cyan"]}
+            colors={["slate", "emerald"]}
             marginTop="mt-3"
           />
         </HStack>

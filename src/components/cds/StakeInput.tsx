@@ -42,7 +42,7 @@ const StakeInput = () => {
           <NumberDecrementStepper />
         </NumberInputStepper>
       </NumberInput>
-      <Button onClick={onStake} variant="solid" colorScheme="blue">
+      <Button onClick={onStake} variant="solid" background="#405654" color="white">
         Stake
       </Button>
     </ButtonGroup>
