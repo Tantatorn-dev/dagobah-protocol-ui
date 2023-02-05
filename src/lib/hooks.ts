@@ -9,7 +9,9 @@ export const useBalance = () => {
   const { data } = useSWR(`/account/balance/${account}`, zondaxFetcher);
 
   const balance = useMemo(() => {
-    return data ? convertBalance(data.balances[0].value) : 0;
+    return data?.balances && data?.balances?.length > 0
+      ? convertBalance(data.balances[0]?.value)
+      : 0;
   }, [data]);
 
   return balance;
