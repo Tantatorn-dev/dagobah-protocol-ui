@@ -17,11 +17,11 @@ import { useState } from "react";
 const StakeInput = () => {
   const balance = useBalance();
   const { sendTransaction } = useSendTransaction();
-  const [sendValue, setSendValue] = useState(0);
+  const [input, setInput] = useState('');
 
   const onStake = () => {
     sendTransaction({
-      value: ethers.utils.parseEther(sendValue.toString()),
+      value: ethers.utils.parseEther(input),
       to: MOCK_POOL_ADDR,
     });
   };
@@ -30,10 +30,11 @@ const StakeInput = () => {
     <ButtonGroup spacing="2" width="100%" justifyContent="flex-end">
       <NumberInput
         max={balance}
+        precision={2}
         keepWithinRange={false}
         clampValueOnBlur={false}
-        value={sendValue}
-        onChange={(value) => setSendValue(parseFloat(value))}
+        value={input}
+        onChange={(value) => setInput(value)}
       >
         <NumberInputField />
         <NumberInputStepper>
