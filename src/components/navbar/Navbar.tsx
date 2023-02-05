@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
 import {
   Box,
   Button,
@@ -18,9 +18,8 @@ import {
 } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useEthers } from "@usedapp/core";
-import useSWR from "swr";
 import { convertBalance } from "@/lib/util";
-import { zondaxFetcher } from "@/lib/fetcher";
+import { useBalance } from "@/lib/hooks";
 
 const navbarStyles = css`
   background-color: #405654;
@@ -29,10 +28,10 @@ const navbarStyles = css`
 
 const HYPERSPACE_RPC_URL = "https://api.hyperspace.node.glif.io/rpc/v1";
 
-const Navbar = () => {
-  const { activateBrowserWallet, account, deactivate, chainId, switchNetwork } =
+const Navbar: React.FC<{ children?: ReactNode }> = ({ children }) => {
+  const { activateBrowserWallet, account, deactivate, chainId } =
     useEthers();
-  const { data } = useSWR(`/account/balance/${account}`, zondaxFetcher);
+  const balance = useBalance();
 
   useEffect(() => {
     async function checkNetwork() {
@@ -44,7 +43,7 @@ const Navbar = () => {
             params: [{ chainId: "0xc45" }],
           });
         } catch (e) {
-          console.log(e)
+          console.log(e);
           if ((e as any).code == 4902) {
             // @ts-ignore
             await window.ethereum.request({
@@ -98,6 +97,7 @@ const Navbar = () => {
             Connect Wallet
           </Button>
         )}
+        {children}
         {account && (
           <Popover>
             <PopoverTrigger>
@@ -115,7 +115,7 @@ const Navbar = () => {
                     `}
                   >
                     My Balance:{" "}
-                    {data ? convertBalance(data.balances[0].value) : 0} TFIL
+                    {balance?.toFixed(2)} TFIL
                   </Text>
                 </PopoverBody>
                 <PopoverFooter>

@@ -1,9 +1,9 @@
 "use client";
-import Navbar from "@/components/navbar/Navbar";
 import { ChakraProvider } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { Config, DAppProvider } from "@usedapp/core";
 import "./globals.css";
+import '@tremor/react/dist/esm/tremor.css';
 
 const HYPERSPACE_CHAIN_ID = 3141;
 const HYPERSPACE_RPC_URL = "https://api.hyperspace.node.glif.io/rpc/v1";
@@ -58,7 +58,6 @@ export default function RootLayout({
       >
         <DAppProvider config={config}>
           <ChakraProvider>
-            <Navbar />
             {children}
           </ChakraProvider>
         </DAppProvider>
