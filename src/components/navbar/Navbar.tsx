@@ -20,6 +20,7 @@ import { css } from "@emotion/css";
 import { useEthers } from "@usedapp/core";
 import { convertBalance } from "@/lib/util";
 import { useBalance } from "@/lib/hooks";
+import Link from "next/link";
 
 const navbarStyles = css`
   background-color: #405654;
@@ -29,8 +30,7 @@ const navbarStyles = css`
 const HYPERSPACE_RPC_URL = "https://api.hyperspace.node.glif.io/rpc/v1";
 
 const Navbar: React.FC<{ children?: ReactNode }> = ({ children }) => {
-  const { activateBrowserWallet, account, deactivate, chainId } =
-    useEthers();
+  const { activateBrowserWallet, account, deactivate, chainId } = useEthers();
   const balance = useBalance();
 
   useEffect(() => {
@@ -82,7 +82,7 @@ const Navbar: React.FC<{ children?: ReactNode }> = ({ children }) => {
     >
       <Box p="2">
         <Heading size="md" color="white">
-          Dagobah Protocol
+          <Link href="/">Dagobah Protocol</Link>
         </Heading>
       </Box>
       <Spacer />
@@ -114,8 +114,7 @@ const Navbar: React.FC<{ children?: ReactNode }> = ({ children }) => {
                       color: black;
                     `}
                   >
-                    My Balance:{" "}
-                    {balance?.toFixed(2)} TFIL
+                    My Balance: {balance?.toFixed(2)} TFIL
                   </Text>
                 </PopoverBody>
                 <PopoverFooter>
